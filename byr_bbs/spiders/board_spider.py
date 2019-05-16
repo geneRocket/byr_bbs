@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import re
+
 import scrapy
 import json
 from .bbs_config import HEADERS, LOGIN_FORMDATA
@@ -76,7 +78,7 @@ class BoardSpiderSpider(scrapy.Spider):
             item['title'] = post['title']
             item['poster'] = post['poster']
             item['gid'] = post['gid']
-            # item['url'] = 'https://bbs.byr.cn/n/article/' + json_dict['data']['name'] + '/' + str(post['gid'])
+            item['url'] = 'https://bbs.byr.cn/#!article/' + json_dict['data']['name'] + '/' + str(post['gid'])
             item['reply_time'] = post['replyTime']
             item['reply_count'] = post['replyCount']
             yield scrapy.Request(
@@ -101,6 +103,7 @@ class BoardSpiderSpider(scrapy.Spider):
             )
 
     def parse_articles(self, response):
+        filter_pattern = re.compile('&nbsp;|<br/>|<br>--')
         json_dict = json.loads(response.body.decode('utf8'))
         total_page = json_dict['data']['pagination']['total']
         current_page = json_dict['data']['pagination']['current']
@@ -111,11 +114,11 @@ class BoardSpiderSpider(scrapy.Spider):
             contents = dict()
             contents['id'] = article['poster']['id']
             contents['time'] = article['time']
-            contents['article_contents'] = article['content'].strip('<br>--')
+            contents['article_contents'] = filter_pattern.sub('', article['content'])
             articles.append(contents)
         item['articles'] = articles
-        print(item)
-        print('=' * 80)
+        yield item
+
         # 翻页
         if current_page <= total_page:
             current_page += 1

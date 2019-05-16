@@ -17,6 +17,7 @@ class ArticleItem(scrapy.Item):
     title = scrapy.Field()
     poster = scrapy.Field()
     gid = scrapy.Field()
+    url = scrapy.Field()
     reply_time = scrapy.Field()
     reply_count = scrapy.Field()
     articles = scrapy.Field()
