@@ -23,6 +23,6 @@ class ByrBbsPipeline(object):
         data_dict = dict(item)
         result = self.es.create(index='bbs_articles', id=self.id, body=data_dict)
         self.id += 1
-        print('id =', result)
+        print('id =', self.id)
 
         return item
