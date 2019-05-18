@@ -17,7 +17,7 @@ NEWSPIDER_MODULE = 'byr_bbs.spiders'
 LOG_LEVEL = 'WARNING'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36'
+# USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
@@ -53,9 +53,10 @@ ROBOTSTXT_OBEY = False
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
-# DOWNLOADER_MIDDLEWARES = {
-#    'byr_bbs.middlewares.ByrBbsDownloaderMiddleware': 543,
-# }
+DOWNLOADER_MIDDLEWARES = {
+    'byr_bbs.middlewares.random_useragent.py': 300,
+    # 'byr_bbs.middlewares.ByrBbsDownloaderMiddleware': 543,
+}
 
 # Enable or disable extensions
 # See https://doc.scrapy.org/en/latest/topics/extensions.html

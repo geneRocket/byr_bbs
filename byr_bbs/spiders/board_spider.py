@@ -3,7 +3,7 @@ import re
 
 import scrapy
 import json
-from .bbs_config import HEADERS, LOGIN_FORMDATA
+from .bbs_config import HEADERS, LOGIN_FORM_DATA
 from byr_bbs.items import BoardItem, ArticleItem
 from copy import deepcopy
 
@@ -26,7 +26,7 @@ class BoardSpiderSpider(scrapy.Spider):
             url='https://bbs.byr.cn/user/ajax_login.json',
             meta={'cookiejar': response.meta['cookiejar']},
             headers=HEADERS,
-            formdata=LOGIN_FORMDATA,
+            formdata=LOGIN_FORM_DATA,
             callback=self.after_login
         )
 

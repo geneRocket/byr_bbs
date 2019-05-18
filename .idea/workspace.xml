@@ -2,9 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="14867a65-2962-4d6a-b91c-074cdce7b426" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/SearchDemo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/byr_bbs/pipelines.py" beforeDir="false" afterPath="$PROJECT_DIR$/byr_bbs/pipelines.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/byr_bbs/middlewares/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/byr_bbs/middlewares/random_useragent.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/byr_bbs/middlewares/resources.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SearchDemo.py" beforeDir="false" afterPath="$PROJECT_DIR$/SearchDemo.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/byr_bbs/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/byr_bbs/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/byr_bbs/spiders/bbs_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/byr_bbs/spiders/bbs_config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/byr_bbs/spiders/board_spider.py" beforeDir="false" afterPath="$PROJECT_DIR$/byr_bbs/spiders/board_spider.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,8 +22,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/byr_bbs/spiders/board_spider.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1384">
-              <caret line="89" column="18" selection-start-line="89" selection-start-column="18" selection-end-line="89" selection-end-column="18" />
+            <state relative-caret-position="651">
+              <caret line="33" selection-start-line="33" selection-end-line="33" />
               <folding>
                 <element signature="e#24#33#0" expanded="true" />
               </folding>
@@ -29,8 +34,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/byr_bbs/pipelines.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="23" column="81" selection-start-line="23" selection-start-column="81" selection-end-line="23" selection-end-column="81" />
+            <state relative-caret-position="110">
+              <caret line="5" selection-start-line="5" selection-end-line="5" />
               <folding>
                 <element signature="e#24#35#0" expanded="true" />
               </folding>
@@ -39,10 +44,22 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/byr_bbs/middlewares/random_useragent.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="124">
+              <caret line="4" selection-start-line="4" selection-end-line="4" />
+              <folding>
+                <element signature="e#0#77#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/byr_bbs/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="223">
-              <caret line="64" selection-start-line="64" selection-end-line="64" />
+            <state relative-caret-position="264">
+              <caret line="55" column="25" selection-start-line="55" selection-start-column="25" selection-end-line="55" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -56,11 +73,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SearchDemo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="124">
-              <caret line="4" column="14" lean-forward="true" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
+            <state relative-caret-position="186">
+              <caret line="6" column="24" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -77,6 +94,9 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>item</find>
+      <find>\</find>
+      <find>agent</find>
+      <find>downloader</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -91,17 +111,20 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/README.MD" />
-        <option value="$PROJECT_DIR$/byr_bbs/settings.py" />
-        <option value="$PROJECT_DIR$/byr_bbs/spiders/board_spider.py" />
         <option value="$PROJECT_DIR$/byr_bbs/pipelines.py" />
         <option value="$PROJECT_DIR$/byr_bbs/items.py" />
         <option value="$PROJECT_DIR$/SearchDemo.py" />
+        <option value="$PROJECT_DIR$/byr_bbs/spiders/bbs_config.py" />
+        <option value="$PROJECT_DIR$/byr_bbs/middlewares/resources.py" />
+        <option value="$PROJECT_DIR$/byr_bbs/settings.py" />
+        <option value="$PROJECT_DIR$/byr_bbs/spiders/board_spider.py" />
+        <option value="$PROJECT_DIR$/byr_bbs/middlewares/random_useragent.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="123" />
-    <option name="y" value="71" />
+    <option name="x" value="165" />
+    <option name="y" value="62" />
     <option name="width" value="1602" />
     <option name="height" value="903" />
   </component>
@@ -113,7 +136,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -121,16 +143,28 @@
               <item name="byr_bbs" type="b2602c69:ProjectViewProjectNode" />
               <item name="byr_bbs" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="byr_bbs" type="b2602c69:ProjectViewProjectNode" />
+              <item name="byr_bbs" type="462c0819:PsiDirectoryNode" />
+              <item name="byr_bbs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="byr_bbs" type="b2602c69:ProjectViewProjectNode" />
+              <item name="byr_bbs" type="462c0819:PsiDirectoryNode" />
+              <item name="byr_bbs" type="462c0819:PsiDirectoryNode" />
+              <item name="middlewares" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../myspider" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunDashboard">
@@ -209,6 +243,8 @@
       <updated>1557902983703</updated>
       <workItem from="1557902984901" duration="1224000" />
       <workItem from="1557987254509" duration="12042000" />
+      <workItem from="1558072387226" duration="112000" />
+      <workItem from="1558157799371" duration="4038000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;save data to Elasticsearch&quot;">
       <created>1557991058867</created>
@@ -242,7 +278,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13266000" />
+    <option name="totallyTimeSpent" value="17416000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -254,20 +290,21 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="123" y="71" width="1602" height="903" extended-state="0" />
+    <frame x="165" y="62" width="1602" height="903" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20694087" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20694087" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32939634" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32939634" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32939634" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32939634" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.2965879" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.23903508" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
@@ -307,13 +344,53 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="&quot;save data to Elasticsearch&quot;" />
     <MESSAGE value="update readme" />
     <option name="LAST_COMMIT_MESSAGE" value="update readme" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/byr_bbs$SearchDemo.coverage" NAME="SearchDemo Coverage Results" MODIFIED="1558053222789" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/byr_bbs$SearchDemo.coverage" NAME="SearchDemo Coverage Results" MODIFIED="1558163102633" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/byr_bbs$pipelines.coverage" NAME="pipelines Coverage Results" MODIFIED="1557989988466" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/byr_bbs" />
   </component>
   <component name="editorHistoryManager">
@@ -327,17 +404,45 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/byr_bbs/settings.py">
+    <entry file="file://$PROJECT_DIR$/byr_bbs/items.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="64" selection-start-line="64" selection-end-line="64" />
+        <state relative-caret-position="248">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/byr_bbs/spiders/bbs_config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="296">
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/byr_bbs/middlewares.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2697">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/byr_bbs/middlewares/resources.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="17" column="29" selection-start-line="17" selection-start-column="29" selection-end-line="17" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SearchDemo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="6" column="24" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/byr_bbs/pipelines.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="23" column="81" selection-start-line="23" selection-start-column="81" selection-end-line="23" selection-end-column="81" />
+        <state relative-caret-position="110">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
           <folding>
             <element signature="e#24#35#0" expanded="true" />
           </folding>
@@ -346,25 +451,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/byr_bbs/spiders/board_spider.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1384">
-          <caret line="89" column="18" selection-start-line="89" selection-start-column="18" selection-end-line="89" selection-end-column="18" />
+        <state relative-caret-position="651">
+          <caret line="33" selection-start-line="33" selection-end-line="33" />
           <folding>
             <element signature="e#24#33#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/byr_bbs/items.py">
+    <entry file="file://$PROJECT_DIR$/byr_bbs/middlewares/random_useragent.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
+        <state relative-caret-position="124">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+          <folding>
+            <element signature="e#0#77#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SearchDemo.py">
+    <entry file="file://$PROJECT_DIR$/byr_bbs/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="124">
-          <caret line="4" column="14" lean-forward="true" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
+        <state relative-caret-position="264">
+          <caret line="55" column="25" selection-start-line="55" selection-start-column="25" selection-end-line="55" selection-end-column="25" />
         </state>
       </provider>
     </entry>
