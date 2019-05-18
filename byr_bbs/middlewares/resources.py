@@ -20,3 +20,7 @@ USER_AGENT_LIST = [
     "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.132 Safari/537.36",
     "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0"
 ]
+
+PROXY_LIST = [
+    ''
+]

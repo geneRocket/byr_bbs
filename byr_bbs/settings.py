@@ -54,7 +54,8 @@ ROBOTSTXT_OBEY = False
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
-    'byr_bbs.middlewares.random_useragent.py': 300,
+    # 'byr_bbs.middlewares.proxy_pool.RandomProxy': 300,
+    'byr_bbs.middlewares.random_useragent.py': 543,
     # 'byr_bbs.middlewares.ByrBbsDownloaderMiddleware': 543,
 }
 

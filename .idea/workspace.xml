@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="14867a65-2962-4d6a-b91c-074cdce7b426" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/byr_bbs/middlewares/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/byr_bbs/middlewares/random_useragent.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/byr_bbs/middlewares/resources.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SearchDemo.py" beforeDir="false" afterPath="$PROJECT_DIR$/SearchDemo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/byr_bbs/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/byr_bbs/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/byr_bbs/spiders/bbs_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/byr_bbs/spiders/bbs_config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/byr_bbs/spiders/board_spider.py" beforeDir="false" afterPath="$PROJECT_DIR$/byr_bbs/spiders/board_spider.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/byr_bbs/middlewares/resources.py" beforeDir="false" afterPath="$PROJECT_DIR$/byr_bbs/middlewares/resources.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,22 +14,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/byr_bbs/spiders/board_spider.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="651">
-              <caret line="33" selection-start-line="33" selection-end-line="33" />
-              <folding>
-                <element signature="e#24#33#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/byr_bbs/pipelines.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="110">
-              <caret line="5" selection-start-line="5" selection-end-line="5" />
+            <state relative-caret-position="124">
+              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
               <folding>
                 <element signature="e#24#35#0" expanded="true" />
               </folding>
@@ -43,23 +25,41 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/byr_bbs/middlewares/random_useragent.py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/byr_bbs/middlewares/resources.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="124">
-              <caret line="4" selection-start-line="4" selection-end-line="4" />
-              <folding>
-                <element signature="e#0#77#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="713">
+              <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/byr_bbs/middlewares/random_useragent.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="62">
+              <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/byr_bbs/settings.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="264">
               <caret line="55" column="25" selection-start-line="55" selection-start-column="25" selection-end-line="55" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.MD">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="217">
+                <caret line="7" column="20" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -97,7 +97,11 @@
       <find>\</find>
       <find>agent</find>
       <find>downloader</find>
+      <find>json</find>
     </findStrings>
+    <dirStrings>
+      <dir>$PROJECT_DIR$/byr_bbs</dir>
+    </dirStrings>
   </component>
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
@@ -110,15 +114,15 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/README.MD" />
         <option value="$PROJECT_DIR$/byr_bbs/pipelines.py" />
         <option value="$PROJECT_DIR$/byr_bbs/items.py" />
         <option value="$PROJECT_DIR$/SearchDemo.py" />
         <option value="$PROJECT_DIR$/byr_bbs/spiders/bbs_config.py" />
-        <option value="$PROJECT_DIR$/byr_bbs/middlewares/resources.py" />
         <option value="$PROJECT_DIR$/byr_bbs/settings.py" />
         <option value="$PROJECT_DIR$/byr_bbs/spiders/board_spider.py" />
         <option value="$PROJECT_DIR$/byr_bbs/middlewares/random_useragent.py" />
+        <option value="$PROJECT_DIR$/README.MD" />
+        <option value="$PROJECT_DIR$/byr_bbs/middlewares/resources.py" />
       </list>
     </option>
   </component>
@@ -164,7 +168,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../myspider" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/byr_bbs/middlewares" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunDashboard">
@@ -244,7 +248,7 @@
       <workItem from="1557902984901" duration="1224000" />
       <workItem from="1557987254509" duration="12042000" />
       <workItem from="1558072387226" duration="112000" />
-      <workItem from="1558157799371" duration="4038000" />
+      <workItem from="1558157799371" duration="6049000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;save data to Elasticsearch&quot;">
       <created>1557991058867</created>
@@ -274,11 +278,25 @@
       <option name="project" value="LOCAL" />
       <updated>1557991485878</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="添加随机 UserAgent">
+      <created>1558165810917</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1558165810917</updated>
+    </task>
+    <task id="LOCAL-00006" summary="update readme">
+      <created>1558165848725</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1558165848725</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17416000" />
+    <option name="totallyTimeSpent" value="19427000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -290,7 +308,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="165" y="62" width="1602" height="903" extended-state="0" />
+    <frame x="165" y="62" width="1602" height="903" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20694087" />
@@ -386,6 +404,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="&quot;save data to Elasticsearch&quot;" />
+    <MESSAGE value="添加随机 UserAgent" />
     <MESSAGE value="update readme" />
     <option name="LAST_COMMIT_MESSAGE" value="update readme" />
   </component>
@@ -394,16 +413,6 @@
     <SUITE FILE_PATH="coverage/byr_bbs$pipelines.coverage" NAME="pipelines Coverage Results" MODIFIED="1557989988466" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/byr_bbs" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/README.MD">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="155">
-            <caret line="5" column="10" lean-forward="true" selection-start-line="5" selection-start-column="10" selection-end-line="5" selection-end-column="10" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/byr_bbs/items.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="248">
@@ -425,13 +434,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/byr_bbs/middlewares/resources.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="17" column="29" selection-start-line="17" selection-start-column="29" selection-end-line="17" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SearchDemo.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="186">
@@ -439,40 +441,54 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/byr_bbs/pipelines.py">
+    <entry file="file://$PROJECT_DIR$/byr_bbs/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
-          <folding>
-            <element signature="e#24#35#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="264">
+          <caret line="55" column="25" selection-start-line="55" selection-start-column="25" selection-end-line="55" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.MD">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="217">
+            <caret line="7" column="20" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/byr_bbs/middlewares/random_useragent.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="62">
+          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/byr_bbs/spiders/board_spider.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="651">
-          <caret line="33" selection-start-line="33" selection-end-line="33" />
+        <state relative-caret-position="496">
+          <caret line="16" column="29" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
           <folding>
             <element signature="e#24#33#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/byr_bbs/middlewares/random_useragent.py">
+    <entry file="file://$PROJECT_DIR$/byr_bbs/pipelines.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="124">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
           <folding>
-            <element signature="e#0#77#0" expanded="true" />
+            <element signature="e#24#35#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/byr_bbs/settings.py">
+    <entry file="file://$PROJECT_DIR$/byr_bbs/middlewares/resources.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="55" column="25" selection-start-line="55" selection-start-column="25" selection-end-line="55" selection-end-column="25" />
+        <state relative-caret-position="713">
+          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
         </state>
       </provider>
     </entry>
