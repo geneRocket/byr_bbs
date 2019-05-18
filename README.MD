@@ -5,6 +5,7 @@
 - [x] 爬取文章内容
 - [x] 爬取跟帖
 - [x] 自动翻页
+- [x] 添加随机 UserAgent
 - [x] 保存爬取内容到 Elasticsearch
 
 ### Todo
