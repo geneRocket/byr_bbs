@@ -14,11 +14,14 @@ class BoardSpiderSpider(scrapy.Spider):
     start_urls = ['https://bbs.byr.cn/index']
 
     def start_requests(self):
-        yield scrapy.Request(
-            url='https://bbs.byr.cn/index',
-            meta={'cookiejar': 1},
-            callback=self.post_login
-        )
+        try:
+            yield scrapy.Request(
+                url='https://bbs.byr.cn/index',
+                meta={'cookiejar': 1},
+                callback=self.post_login
+            )
+        except:
+            print(">>>>>>>>>>>>>> Proxy not reachable")
 
     def post_login(self, response):
         yield scrapy.FormRequest.from_response(

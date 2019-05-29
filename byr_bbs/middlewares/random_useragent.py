@@ -7,4 +7,4 @@ import random
 class RandomUserAgent(UserAgentMiddleware):
     def process_request(self, request, spider):
         user_agent = random.choice(USER_AGENT_LIST)
-        request.headers.setdefault('User-Agent', user_agent)
+        request.headers['User-Agent'] = user_agent

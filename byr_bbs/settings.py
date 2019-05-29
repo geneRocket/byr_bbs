@@ -15,6 +15,7 @@ SPIDER_MODULES = ['byr_bbs.spiders']
 NEWSPIDER_MODULE = 'byr_bbs.spiders'
 
 LOG_LEVEL = 'WARNING'
+DOWNLOAD_TIMEOUT = 15
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 # USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36'
@@ -55,7 +56,7 @@ ROBOTSTXT_OBEY = False
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
     'byr_bbs.middlewares.proxy_pool.RandomProxy': 300,
-    'byr_bbs.middlewares.random_useragent.py': 543,
+    'byr_bbs.middlewares.random_useragent.RandomUserAgent': 543,
     # 'byr_bbs.middlewares.ByrBbsDownloaderMiddleware': 543,
 }
 
