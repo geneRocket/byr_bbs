@@ -6,7 +6,8 @@
 - [x] 爬取跟帖
 - [x] 自动翻页
 - [x] 添加随机 UserAgent
-- [x] 使用代理池, 随机 ip
+- [x] 使用代理池, 随机 IP
+- [x] 爬取结果去重
 - [x] 保存爬取内容到 Elasticsearch
 
 ### Todo
