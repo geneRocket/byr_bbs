@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import json
+import re
 
 from elasticsearch import Elasticsearch
 
@@ -13,16 +13,23 @@ from elasticsearch import Elasticsearch
 class ByrBbsPipeline(object):
     def __init__(self):
         self.es = Elasticsearch()
-        self.id = 1
-        self.es.indices.create(index='bbs_articles', ignore=400)
+        self.id = 0
+        self.tmp_set = set()
+        if not self.es.indices.exists('bbs_articles_demo'):
+            self.es.indices.create(index='bbs_articles_demo', ignore=400)
 
     def process_item(self, item, spider):
-        print(item['title'])
-        print(item['url'])
         print('=' * 80)
+        print('id = ' + str(self.id), item['title'])
+        print(item['url'])
         data_dict = dict(item)
-        result = self.es.create(index='bbs_articles', id=self.id, body=data_dict)
-        self.id += 1
-        print('id =', self.id)
+        if item['url'] not in self.tmp_set:
+            results = re.findall('https://bbs.byr.cn/#!article/(.*?)/(\d+)', item['url'])
+            item_id = results[0][0] + results[0][1]
+            self.tmp_set.add(item['url'])
+            self.es.create(index='bbs_articles_demo', id=item_id, body=data_dict)
+            self.id += 1
+        else:
+            print('>' * 37 + '已去重' + '<' * 37)
 
         return item
