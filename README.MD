@@ -9,7 +9,3 @@
 - [x] 使用代理池, 随机 IP
 - [x] 爬取结果去重
 - [x] 保存爬取内容到 Elasticsearch
-
-### Todo
- - [ ] 加入 Django
- - [ ] 搜索结果统计(pyeacharts)
