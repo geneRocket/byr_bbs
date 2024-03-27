@@ -1,17 +1,29 @@
 # -*- coding: utf-8 -*-
+import json
 import re
+from copy import deepcopy
 
 import scrapy
-import json
-from .bbs_config import HEADERS, LOGIN_FORM_DATA
+
 from byr_bbs.items import BoardItem, ArticleItem
-from copy import deepcopy
+from .bbs_config import HEADERS, LOGIN_FORM_DATA
 
 
 class BoardSpiderSpider(scrapy.Spider):
     name = 'board_spider'
     allowed_domains = ['byr.cn']
     start_urls = ['https://bbs.byr.cn/index']
+    replace_dict = {
+        "&nbsp;": " ",
+        "<br/>": "\n",
+        "<br />": "\n",
+        "<br/><br/>": "\n",
+        "<br>--": ""
+    }
+    filter_pattern = re.compile('|<img border="[\S]*" src="[\S]*" alt="[\S]*" class="[\S]*" title="[\S]*"/>'
+                                '|<span class="emoji" style=".*".*</span>'
+                                '|<img src=".*" alt=".*" style=".*"/>')
+    link_pattern = re.compile(r'<a target="_blank" href="([\S]*)">单击此查看原图(([\S]*))</a>')
 
     def start_requests(self):
         try:
@@ -106,7 +118,6 @@ class BoardSpiderSpider(scrapy.Spider):
             )
 
     def parse_articles(self, response):
-        filter_pattern = re.compile('&nbsp;|<br/>|<br>--')
         json_dict = json.loads(response.body.decode('utf8'))
         total_page = json_dict['data']['pagination']['total']
         current_page = json_dict['data']['pagination']['current']
@@ -116,8 +127,17 @@ class BoardSpiderSpider(scrapy.Spider):
         for article in article_list:
             contents = dict()
             contents['id'] = article['poster']['id']
+            contents['user_name'] = article['poster'].get('user_name', None)
             contents['time'] = article['time']
-            contents['article_contents'] = filter_pattern.sub('', article['content'])
+            article_content = article['content']
+            for old in self.replace_dict:
+                new = self.replace_dict[old]
+                article_content = article_content.replace(old, new)
+            article_content = self.filter_pattern.sub('', article_content)
+            article_content = self.link_pattern.sub(r' https://bbs.byr.cn/\1 ', article_content)
+            contents['article_contents'] = article_content
+            contents['voteup_count'] = article['voteup_count']
+            contents['votedown_count'] = article['votedown_count']
             articles.append(contents)
         item['articles'] = articles
         yield item
