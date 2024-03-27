@@ -18,12 +18,28 @@ class BoardSpiderSpider(scrapy.Spider):
         "<br/>": "\n",
         "<br />": "\n",
         "<br/><br/>": "\n",
-        "<br>--": ""
+        "<br>--": "",
+        "&gt;": ">",
+        "_&lt;": "<",
     }
     filter_pattern = re.compile('|<img border="[\S]*" src="[\S]*" alt="[\S]*" class="[\S]*" title="[\S]*"/>'
                                 '|<span class="emoji" style=".*".*</span>'
                                 '|<img src=".*" alt=".*" style=".*"/>')
-    link_pattern = re.compile(r'<a target="_blank" href="([\S]*)">单击此查看原图(([\S]*))</a>')
+
+    re_replace_dict = [
+        (
+            re.compile(r'<a target="_blank" href="([\S]*)">单击此查看原图(([\S]*))</a>'),
+            r' https://bbs.byr.cn/\1 '
+        ),
+        (
+            re.compile(r'<a href="(.*)" target="_blank" <font color=".*">附件.*</font>.*</a>'),
+            r' https://bbs.byr.cn/\1 '
+        ),
+        (
+            re.compile(r'<a target=".*" href="(.*)".*</a>'),
+            r' \1 '
+        )
+    ]
 
     def start_requests(self):
         try:
@@ -134,12 +150,16 @@ class BoardSpiderSpider(scrapy.Spider):
                 new = self.replace_dict[old]
                 article_content = article_content.replace(old, new)
             article_content = self.filter_pattern.sub('', article_content)
-            article_content = self.link_pattern.sub(r' https://bbs.byr.cn/\1 ', article_content)
+            for (old, new) in self.re_replace_dict:
+                article_content = old.sub(new, article_content)
             contents['article_contents'] = article_content
             contents['voteup_count'] = article['voteup_count']
             contents['votedown_count'] = article['votedown_count']
+            contents['pos'] = article['pos']
             articles.append(contents)
-        item['articles'] = articles
+        if (item.get('articles') is None):
+            item['articles'] = []
+        item['articles'] = item['articles'] + articles
         yield item
 
         # 翻页

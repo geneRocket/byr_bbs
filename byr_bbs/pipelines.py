@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
+import json
 import re
-
-from elasticsearch import Elasticsearch
 
 
 # Define your item pipelines here
@@ -12,24 +11,34 @@ from elasticsearch import Elasticsearch
 
 class ByrBbsPipeline(object):
     def __init__(self):
-        self.es = Elasticsearch()
         self.id = 0
-        self.tmp_set = set()
-        if not self.es.indices.exists('bbs_articles_demo'):
-            self.es.indices.create(index='bbs_articles_demo', ignore=400)
+        self.url_set = set()
+        self.data_dict = dict()
 
     def process_item(self, item, spider):
-        print('=' * 80)
-        print('id = ' + str(self.id), item['title'])
-        print(item['url'])
-        data_dict = dict(item)
-        if item['url'] not in self.tmp_set:
-            results = re.findall('https://bbs.byr.cn/#!article/(.*?)/(\d+)', item['url'])
-            item_id = results[0][0] + results[0][1]
-            self.tmp_set.add(item['url'])
-            self.es.create(index='bbs_articles_demo', id=item_id, body=data_dict)
+        item_dict = dict(item)
+        results = re.findall('https://bbs.byr.cn/#!article/(.*?)/(\d+)', item['url'])
+        item_id = results[0][0] + results[0][1]
+        if item['url'] not in self.url_set:
+            self.url_set.add(item['url'])
+            self.data_dict[item['url']] = item_dict
             self.id += 1
         else:
-            print('>' * 37 + '已去重' + '<' * 37)
+            if len(item_dict["articles"]) > len(self.data_dict[item['url']]["articles"]):
+                self.data_dict[item['url']] = item_dict
+
+        print(json.dumps(item_dict, ensure_ascii=False))
+
+        if (self.id % 1000 == 0):
+            self.save_data()
 
         return item
+
+    def save_data(self):
+        with open("byr_data.json", "w") as outfile:
+            for value in self.data_dict.values():
+                outfile.write(json.dumps(value, ensure_ascii=False) + "\n")
+
+    def close_spider(self, spider):
+        self.save_data()
+        print("close_spider")
