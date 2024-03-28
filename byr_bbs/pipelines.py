@@ -24,7 +24,7 @@ class ByrBbsPipeline(object):
             self.data_dict[item['url']] = item_dict
             self.id += 1
         else:
-            if len(item_dict["articles"]) > len(self.data_dict[item['url']]["articles"]):
+            if self.needUpdate(item_dict):
                 self.data_dict[item['url']] = item_dict
 
         print(json.dumps(item_dict, ensure_ascii=False))
@@ -34,10 +34,17 @@ class ByrBbsPipeline(object):
 
         return item
 
+    def needUpdate(self, item_dict):
+        try:
+            return len(item_dict["articles"]) > len(self.data_dict[item_dict['url']]["articles"])
+        except KeyError:
+            return True
+
     def save_data(self):
-        with open("byr_data.json", "w") as outfile:
+        with open("byr_data.json", "a") as outfile:
             for value in self.data_dict.values():
                 outfile.write(json.dumps(value, ensure_ascii=False) + "\n")
+        self.data_dict.clear()
 
     def close_spider(self, spider):
         self.save_data()
