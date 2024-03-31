@@ -1,4 +1,5 @@
-from scrapy.contrib.downloadermiddleware.useragent import UserAgentMiddleware
+from scrapy.downloadermiddlewares.useragent import UserAgentMiddleware
+
 from byr_bbs.middlewares.resources import USER_AGENT_LIST
 
 import random
