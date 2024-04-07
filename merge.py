@@ -47,7 +47,7 @@ class MergeFile(object):
         return item
 
     def save_data(self):
-        with open("byr_data_merge2.json", "w") as outfile:
+        with open("byr_data_merge.json", "w") as outfile:
             for value in self.data_dict.values():
                 outfile.write(json.dumps(value, ensure_ascii=False) + "\n")
 
