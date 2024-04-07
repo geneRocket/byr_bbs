@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import datetime
 import json
 import re
 from copy import deepcopy
@@ -7,6 +8,31 @@ import scrapy
 
 from byr_bbs.items import BoardItem, ArticleItem
 from .bbs_config import HEADERS, LOGIN_FORM_DATA
+
+
+def normalized_time(input_time_str):
+    if ("今天" in input_time_str):
+        today_str = datetime.datetime.now().strftime('%Y-%m-%d')
+        return input_time_str.replace("今天", today_str)
+    if ("分钟前" in input_time_str):
+        minue = int(input_time_str[:input_time_str.find("分钟前")])
+        return (datetime.datetime.now() - datetime.timedelta(minutes=minue)).strftime("%Y-%m-%d %H:%M:%S")
+    return input_time_str
+
+
+def check_time(input_time_str):
+    if ("今天" in input_time_str):
+        return False
+    if ("分钟前" in input_time_str):
+        return False
+    return True
+
+
+def check_time_for_item(item):
+    for article in item['articles']:
+        if not check_time(article['time']):
+            return False
+    return True
 
 
 class BoardSpiderSpider(scrapy.Spider):
@@ -50,7 +76,10 @@ class BoardSpiderSpider(scrapy.Spider):
             data_dict[item['url']] = {
                 "reply_count": item["reply_count"],
                 "reply_time": item["reply_time"][:10],
+                "articles": item["articles"],
             }
+
+    skip_count = 0
 
     def start_requests(self):
         try:
@@ -117,17 +146,21 @@ class BoardSpiderSpider(scrapy.Spider):
         post_list = json_dict['data']['posts']
         for post in post_list:
             url = 'https://bbs.byr.cn/#!article/' + json_dict['data']['name'] + '/' + str(post['gid'])
-            if (url in self.data_dict and (
-                    post['replyCount'] <= self.data_dict[url]['reply_count']
-                    and ("天" not in post['replyTime'][:10]
-                         and post['replyTime'][:10] <= self.data_dict[url]['reply_time'][:10]))):
+            if (url in self.data_dict
+                    and (post['replyCount'] <= self.data_dict[url]['reply_count']
+                         and (check_time(post['replyTime'][:10]) and check_time(self.data_dict[url]['reply_time'][:10])
+                              and post['replyTime'][:10] <= self.data_dict[url]['reply_time'][:10]))
+                    and check_time_for_item(self.data_dict[url])):
+                self.skip_count += 1
+                if (self.skip_count % 10000 == 0):
+                    print("skip:", self.skip_count)
                 continue
             item = ArticleItem()
             item['title'] = post['title']
             item['poster'] = post['poster']
             item['gid'] = post['gid']
             item['url'] = url
-            item['reply_time'] = post['replyTime']
+            item['reply_time'] = normalized_time(post['replyTime'])
             item['reply_count'] = post['replyCount']
             yield scrapy.Request(
                 url='https://bbs.byr.cn/n/b/article/' + json_dict['data']['name'] + '/'
@@ -164,7 +197,7 @@ class BoardSpiderSpider(scrapy.Spider):
             contents = dict()
             contents['id'] = article['poster']['id']
             contents['user_name'] = article['poster'].get('user_name', None)
-            contents['time'] = article['time']
+            contents['time'] = normalized_time(article['time'])
             article_content = article['content']
             for old in self.replace_dict:
                 new = self.replace_dict[old]
@@ -194,4 +227,5 @@ class BoardSpiderSpider(scrapy.Spider):
                 callback=self.parse_articles
             )
         else:
+            print(json.dumps(dict(item), ensure_ascii=False))
             yield item

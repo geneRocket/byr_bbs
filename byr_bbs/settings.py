@@ -15,7 +15,7 @@ SPIDER_MODULES = ['byr_bbs.spiders']
 NEWSPIDER_MODULE = 'byr_bbs.spiders'
 
 LOG_LEVEL = 'WARNING'
-DOWNLOAD_TIMEOUT = 15
+DOWNLOAD_TIMEOUT = 1
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 # USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36'
@@ -24,7 +24,8 @@ DOWNLOAD_TIMEOUT = 15
 ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-# CONCURRENT_REQUESTS = 32
+CONCURRENT_REQUESTS = 32
+RETRY_TIMES = 0
 
 # Configure a delay for requests for the same website (default: 0)
 # See https://doc.scrapy.org/en/latest/topics/settings.html#download-delay

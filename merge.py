@@ -18,11 +18,11 @@ def unique(list):
 def merge(old_item, new_item):
     key = lambda item: (item['pos'], item['article_contents'])
 
-    new_articles = unique(new_item["articles"], key) or []
-    old_articles = unique(old_item["articles"], key) or []
+    new_articles = new_item["articles"] or []
+    old_articles = old_item["articles"] or []
     all_articles = old_articles + new_articles
     all_articles.sort(key=key)
-    all_articles = unique(all_articles, key)
+    all_articles = unique(all_articles)
     new_item["articles"] = all_articles
     return new_item
 

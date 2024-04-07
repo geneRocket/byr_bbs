@@ -14,7 +14,7 @@ class LoadEs(object):
 
     def process_item(self):
         i = 0
-        for line in open("byr_data_merge.json", "r"):
+        for line in open("byr_data.json", "r"):
             i += 1
             try:
                 item = json.loads(line)
