@@ -2,6 +2,8 @@
 import json
 import re
 
+import merge
+
 
 # Define your item pipelines here
 #
@@ -24,21 +26,13 @@ class ByrBbsPipeline(object):
             self.data_dict[item['url']] = item_dict
             self.id += 1
         else:
-            if self.needUpdate(item_dict):
-                self.data_dict[item['url']] = item_dict
-
-        print(json.dumps(item_dict, ensure_ascii=False))
+            old = self.data_dict[item_dict['url']]
+            self.data_dict[item['url']] = merge.merge(old, item_dict)
 
         if (self.id % 1000 == 0):
             self.save_data()
 
         return item
-
-    def needUpdate(self, item_dict):
-        try:
-            return len(item_dict["articles"]) > len(self.data_dict[item_dict['url']]["articles"])
-        except KeyError:
-            return True
 
     def save_data(self):
         with open("byr_data.json", "a") as outfile:

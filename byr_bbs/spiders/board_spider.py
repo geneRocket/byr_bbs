@@ -41,6 +41,17 @@ class BoardSpiderSpider(scrapy.Spider):
         )
     ]
 
+    data_dict = dict()
+
+    with open("byr_data_merge.json", "r") as infile:
+        for line in infile:
+            item = json.loads(line)
+            item_dict = dict(item)
+            data_dict[item['url']] = {
+                "reply_count": item["reply_count"],
+                "reply_time": item["reply_time"][:10],
+            }
+
     def start_requests(self):
         try:
             yield scrapy.Request(
@@ -105,11 +116,17 @@ class BoardSpiderSpider(scrapy.Spider):
         current_page = json_dict['data']['pagination']['current']
         post_list = json_dict['data']['posts']
         for post in post_list:
+            url = 'https://bbs.byr.cn/#!article/' + json_dict['data']['name'] + '/' + str(post['gid'])
+            if (url in self.data_dict and (
+                    post['replyCount'] <= self.data_dict[url]['reply_count']
+                    and ("天" not in post['replyTime'][:10]
+                         and post['replyTime'][:10] <= self.data_dict[url]['reply_time'][:10]))):
+                continue
             item = ArticleItem()
             item['title'] = post['title']
             item['poster'] = post['poster']
             item['gid'] = post['gid']
-            item['url'] = 'https://bbs.byr.cn/#!article/' + json_dict['data']['name'] + '/' + str(post['gid'])
+            item['url'] = url
             item['reply_time'] = post['replyTime']
             item['reply_count'] = post['replyCount']
             yield scrapy.Request(
@@ -134,7 +151,10 @@ class BoardSpiderSpider(scrapy.Spider):
             )
 
     def parse_articles(self, response):
-        json_dict = json.loads(response.body.decode('utf8'))
+        try:
+            json_dict = json.loads(response.body.decode('utf8'))
+        except:
+            return
         total_page = json_dict['data']['pagination']['total']
         current_page = json_dict['data']['pagination']['current']
         article_list = json_dict['data']['articles']
@@ -160,10 +180,9 @@ class BoardSpiderSpider(scrapy.Spider):
         if (item.get('articles') is None):
             item['articles'] = []
         item['articles'] = item['articles'] + articles
-        yield item
 
         # 翻页
-        if current_page <= total_page:
+        if current_page < total_page:
             current_page += 1
             yield scrapy.Request(
                 url='https://bbs.byr.cn/n/b/article/' + response.meta['name'] + '/'
@@ -174,3 +193,5 @@ class BoardSpiderSpider(scrapy.Spider):
                 },
                 callback=self.parse_articles
             )
+        else:
+            yield item
