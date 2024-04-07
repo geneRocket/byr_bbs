@@ -23,7 +23,7 @@ class ByrBbsPipeline(object):
         item_id = results[0][0] + results[0][1]
         if item['url'] not in self.url_set:
             self.url_set.add(item['url'])
-            self.data_dict[item['url']] = item_dict
+            self.data_dict[item['url']] = merge.merge(item_dict, item_dict)
             self.id += 1
         else:
             old = self.data_dict[item_dict['url']]

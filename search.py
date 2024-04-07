@@ -15,7 +15,17 @@ def search_demo():
                     "bool": {
                         "should": [
 
-                        ]
+                        ],
+                        "filter": [
+                            {
+                                "range": {
+                                    'reply_time': {
+                                        'gte': '2020-06-01'
+                                    }
+                                }
+                            }
+
+                        ],
                     }
                 },
                 "functions": [
@@ -83,9 +93,6 @@ def search_demo():
         print(json.dumps(result.body, ensure_ascii=False))
 
     for item in result["hits"]["hits"]:
-        text = ''
-        for article in item['_source']['articles']:
-            text = text + article['article_contents']
         print(item["_source"]["title"], item["_source"]["url"], item["sort"])
 
 

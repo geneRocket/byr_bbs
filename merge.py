@@ -37,7 +37,7 @@ class MergeFile(object):
         results = re.findall('https://bbs.byr.cn/#!article/(.*?)/(\d+)', item['url'])
         item_id = results[0][0] + results[0][1]
         if item['url'] not in self.data_dict:
-            self.data_dict[item['url']] = item_dict
+            self.data_dict[item['url']] = merge(item_dict, item_dict)
             self.id += 1
         else:
             old = self.data_dict[item['url']]
@@ -61,9 +61,12 @@ if __name__ == '__main__':
             item = json.loads(line)
             mergeFile.process_item(item)
 
-    with open("byr_data.json", "r") as infile:
-        for line in infile:
-            item = json.loads(line)
-            mergeFile.process_item(item)
+    try:
+        with open("byr_data.json", "r") as infile:
+            for line in infile:
+                item = json.loads(line)
+                mergeFile.process_item(item)
+    except FileNotFoundError:
+        pass
 
     mergeFile.save_data()
