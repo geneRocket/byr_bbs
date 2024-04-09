@@ -20,7 +20,7 @@ def search_demo():
                             {
                                 "range": {
                                     'reply_time': {
-                                        'gte': '2020-06-01'
+                                        # 'gte': '2020-06-01'
                                     }
                                 }
                             }

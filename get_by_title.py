@@ -4,7 +4,7 @@ es = Elasticsearch(hosts="http://localhost:9200")
 
 
 def get_demo():
-    word = "看到阿里云事件校招生被排挤事件"
+    word = "网飞三体怎么样"
 
     dsl = {
         "query": {
