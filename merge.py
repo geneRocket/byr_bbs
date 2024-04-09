@@ -2,16 +2,17 @@ import json
 import re
 
 
-def unique(list):
+def unique(item_list):
     key_exactor = lambda item: (item['id'], item['article_contents'])
 
-    key_set = set()
-    ret = []
-    for item in list:
+    key_dict = dict()
+    for item in item_list:
         key = key_exactor(item)
-        if key not in key_set:
-            key_set.add(key)
-            ret.append(item)
+        if key not in key_dict:
+            key_dict[key] = item
+        else:
+            key_dict[key]["voteup_count"] = max(key_dict[key]["voteup_count"], item["voteup_count"])
+    ret = list(key_dict.values())
     return ret
 
 
@@ -21,8 +22,8 @@ def merge(old_item, new_item):
     new_articles = new_item["articles"] or []
     old_articles = old_item["articles"] or []
     all_articles = old_articles + new_articles
-    all_articles.sort(key=key)
     all_articles = unique(all_articles)
+    all_articles.sort(key=key)
     new_item["articles"] = all_articles
     return new_item
 
