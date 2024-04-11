@@ -6,14 +6,18 @@ def unique(item_list):
     key_exactor = lambda item: (item['id'], item['article_contents'])
 
     key_dict = dict()
+    key_order = []
     for item in item_list:
         key = key_exactor(item)
         if key not in key_dict:
             key_dict[key] = item
+            key_order.append(key)
         else:
             key_dict[key]["voteup_count"] = max(key_dict[key]["voteup_count"], item["voteup_count"])
             key_dict[key]["votedown_count"] = max(key_dict[key]["votedown_count"], item["votedown_count"])
-    ret = list(key_dict.values())
+    ret = []
+    for key in key_order:
+        ret.append(key_dict[key])
     return ret
 
 
@@ -54,15 +58,12 @@ class MergeFile(object):
                 outfile.write(json.dumps(value, ensure_ascii=False) + "\n")
 
 
-if __name__ == '__main__':
-
+def doMerge():
     mergeFile = MergeFile()
-
     with open("byr_data_merge.json", "r") as infile:
         for line in infile:
             item = json.loads(line)
             mergeFile.process_item(item)
-
     try:
         with open("byr_data.json", "r") as infile:
             for line in infile:
@@ -70,5 +71,8 @@ if __name__ == '__main__':
                 mergeFile.process_item(item)
     except FileNotFoundError:
         pass
-
     mergeFile.save_data()
+
+
+if __name__ == '__main__':
+    doMerge()

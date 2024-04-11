@@ -15,3 +15,8 @@ from byr_bbs.spiders.board_spider import BoardSpiderSpider
 process = CrawlerProcess(get_project_settings())
 process.crawl(BoardSpiderSpider)
 process.start()
+process.join()
+if False:
+    load2es.doLoadEs()
+    merge.doMerge()
+    os.remove("byr_data.json")

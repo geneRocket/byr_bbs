@@ -101,5 +101,10 @@ class LoadEs(object):
                 print(len(self.tmp_set))
 
 
-load = LoadEs()
-load.process_item()
+def doLoadEs():
+    load = LoadEs()
+    load.process_item()
+
+
+if __name__ == '__main__':
+    doLoadEs()

@@ -17,6 +17,8 @@ def normalized_time(input_time_str):
     if ("分钟前" in input_time_str):
         minue = int(input_time_str[:input_time_str.find("分钟前")])
         return (datetime.datetime.now() - datetime.timedelta(minutes=minue)).strftime("%Y-%m-%d %H:%M:%S")
+    if ("刚刚" in input_time_str):
+        return datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     return input_time_str
 
 
@@ -24,6 +26,8 @@ def check_time(input_time_str):
     if ("今天" in input_time_str):
         return False
     if ("分钟前" in input_time_str):
+        return False
+    if ("刚刚" in input_time_str):
         return False
     return True
 
@@ -51,7 +55,7 @@ def method_name(data_dict, infile):
         item_dict = dict(item)
         data_dict[item['url']] = {
             "reply_count": item["reply_count"],
-            "reply_time": item["reply_time"][:10],
+            "reply_time": item["reply_time"],
             "articles": item["articles"],
         }
 
@@ -155,17 +159,18 @@ class BoardSpiderSpider(scrapy.Spider):
         total_page = json_dict['data']['pagination']['total']
         current_page = json_dict['data']['pagination']['current']
         post_list = json_dict['data']['posts']
+        has_new_reply = False
         for post in post_list:
             url = 'https://bbs.byr.cn/#!article/' + json_dict['data']['name'] + '/' + str(post['gid'])
             if (url in self.data_dict
-                    and (post['replyCount'] <= self.data_dict[url]['reply_count']
-                         and (check_time(post['replyTime'][:10]) and check_time(self.data_dict[url]['reply_time'][:10])
-                              and post['replyTime'][:10] <= self.data_dict[url]['reply_time'][:10]))
+                    and post['replyCount'] <= self.data_dict[url]['reply_count']
+                    and (normalized_time(post['replyTime']) <= normalized_time(self.data_dict[url]['reply_time']))
                     and check_time_for_item(self.data_dict[url])):
                 self.skip_count += 1
                 if (self.skip_count % 10000 == 0):
                     print("skip:", self.skip_count)
                 continue
+            has_new_reply = True
             item = ArticleItem()
             item['title'] = post['title']
             item['poster'] = post['poster']
@@ -183,7 +188,7 @@ class BoardSpiderSpider(scrapy.Spider):
                 callback=self.parse_articles
             )
         # 翻页
-        if current_page <= total_page:
+        if has_new_reply and current_page <= total_page:
             current_page += 1
             yield scrapy.Request(
                 url='https://bbs.byr.cn/n/b/board/' + response.meta['id'] + '.json?page=' + str(current_page),

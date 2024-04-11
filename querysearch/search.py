@@ -32,18 +32,19 @@ def search_demo():
                     {
                         "script_score": {
                             "script": {
-                                "source": "Math.log1p(doc['articles.voteup_count'].sum())",
+                                "source": "Math.log10(2+(doc['articles.voteup_count'].sum()))",
                                 "lang": "painless"
-                            }
+                            },
                         },
                         "weight": 1
                     },
                     {
                         "field_value_factor": {
                             "field": "reply_count",
-                            "modifier": "log1p",  # ln2p，log1p
+                            "modifier": "log2p",  # ln2p，log2p
+                            "factor": 0.5
                         },
-                        "weight": 0.5
+                        "weight": 1
                     },
                 ],
                 "score_mode": "sum",
@@ -64,7 +65,7 @@ def search_demo():
             },
 
         },
-        "from": 0, "size": 200,
+        "from": 0, "size": 20,
 
     }
 

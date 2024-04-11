@@ -1,3 +1,5 @@
+import datetime
+
 from elasticsearch import Elasticsearch
 
 es = Elasticsearch(hosts="http://localhost:9200")
@@ -15,7 +17,7 @@ def get_demo():
                     {
                         "range": {
                             'reply_time': {
-                                'gte': '2024-04-09'
+                                'gte': (datetime.datetime.now() - datetime.timedelta(hours=24)).strftime("%Y-%m-%d")
                             }
                         }
                     }
