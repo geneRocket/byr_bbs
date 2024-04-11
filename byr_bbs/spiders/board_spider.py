@@ -35,6 +35,27 @@ def check_time_for_item(item):
     return True
 
 
+def getHistory():
+    data_dict = dict()
+
+    with open("byr_data_merge.json", "r") as infile:
+        method_name(data_dict, infile)
+    with open("byr_data.json", "r") as infile:
+        method_name(data_dict, infile)
+    return data_dict
+
+
+def method_name(data_dict, infile):
+    for line in infile:
+        item = json.loads(line)
+        item_dict = dict(item)
+        data_dict[item['url']] = {
+            "reply_count": item["reply_count"],
+            "reply_time": item["reply_time"][:10],
+            "articles": item["articles"],
+        }
+
+
 class BoardSpiderSpider(scrapy.Spider):
     name = 'board_spider'
     allowed_domains = ['byr.cn']
@@ -67,17 +88,7 @@ class BoardSpiderSpider(scrapy.Spider):
         )
     ]
 
-    data_dict = dict()
-
-    with open("byr_data_merge.json", "r") as infile:
-        for line in infile:
-            item = json.loads(line)
-            item_dict = dict(item)
-            data_dict[item['url']] = {
-                "reply_count": item["reply_count"],
-                "reply_time": item["reply_time"][:10],
-                "articles": item["articles"],
-            }
+    data_dict = getHistory()
 
     skip_count = 0
 

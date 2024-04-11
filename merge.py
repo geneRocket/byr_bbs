@@ -12,6 +12,7 @@ def unique(item_list):
             key_dict[key] = item
         else:
             key_dict[key]["voteup_count"] = max(key_dict[key]["voteup_count"], item["voteup_count"])
+            key_dict[key]["votedown_count"] = max(key_dict[key]["votedown_count"], item["votedown_count"])
     ret = list(key_dict.values())
     return ret
 
