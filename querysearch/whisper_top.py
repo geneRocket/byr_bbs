@@ -6,8 +6,6 @@ es = Elasticsearch(hosts="http://localhost:9200")
 
 
 def get_demo():
-    word = "网飞三体怎么样"
-
     dsl = {
         "query": {
 
@@ -17,7 +15,7 @@ def get_demo():
                     {
                         "range": {
                             'reply_time': {
-                                'gte': (datetime.datetime.now() - datetime.timedelta(hours=24)).strftime("%Y-%m-%d")
+                                'gte': (datetime.datetime.now() - datetime.timedelta(days=2)).strftime("%Y-%m-%d")
                             }
                         }
                     }

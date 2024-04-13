@@ -94,7 +94,23 @@ def search_demo():
         print(json.dumps(result.body, ensure_ascii=False))
 
     for item in result["hits"]["hits"]:
+        text = ''
+        key = lambda item: (int(item['voteup_count']))
+        item['_source']['articles'].sort(key=key, reverse=True)
+        cnt = 0
+        for article in item['_source']['articles']:
+            if (int(article['voteup_count']) == 0):
+                break
+            if "【 在 " in article['article_contents']:
+                article['article_contents'] = article['article_contents'][:article['article_contents'].find("【 在 ")]
+            article['article_contents'] = article['article_contents'].replace("\n", "")
+            text += article['voteup_count'] + " " + article['article_contents'] + "\n"
+            cnt += 1
+            if cnt > 5:
+                break
+        print('=' * 40)
         print(item["_source"]["title"], item["_source"]["url"], item["sort"])
+        print(text)
 
 
 
