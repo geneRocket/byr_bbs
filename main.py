@@ -1,5 +1,7 @@
 import os
 
+import load2es
+
 if not os.path.exists("byr_data.json"):
     with open("byr_data.json", "a+") as _:
         pass
@@ -16,7 +18,8 @@ process = CrawlerProcess(get_project_settings())
 process.crawl(BoardSpiderSpider)
 process.start()
 process.join()
-if False:
+if True:
     load2es.doLoadEs()
+if False:
     merge.doMerge()
     os.remove("byr_data.json")
