@@ -48,7 +48,7 @@ def search_demo():
                         "weight": 1
                     },
                 ],
-                "score_mode": "sum",
+                "score_mode": "multiply",
                 "boost_mode": "multiply",
                 "max_boost": 3
             },
@@ -66,7 +66,7 @@ def search_demo():
             },
 
         },
-        "from": 0, "size": 20,
+        "from": 0, "size": 40,
 
     }
 
@@ -95,12 +95,12 @@ def search_demo():
         print(json.dumps(result.body, ensure_ascii=False))
 
     for item in result["hits"]["hits"]:
-        text = ''
+        print(item["_source"]["title"], item["_source"]["url"], item["sort"])
         key = lambda item: (int(item['voteup_count']))
         item['_source']['articles'].sort(key=key, reverse=True)
         cnt = 0
-        ref1_re = re.compile(r'【 在 .+ 的大作中提到: 】\n: .+\n+(.+)')
-        ref2_re = re.compile(r'(.+)\n+【 在 .+ 的大作中提到: 】\n: .+')
+        ref1_re = re.compile(r'[【 在 .+ 的大作中提到: 】\n: .+\n+]+(.+)')
+        ref2_re = re.compile(r'(.+)\n+[【 在 .+ 的大作中提到: 】\n: .+]+')
         for article in item['_source']['articles']:
             if (int(article['voteup_count']) < 5):
                 break
@@ -108,13 +108,11 @@ def search_demo():
                 article['article_contents'] = ref1_re.sub(r'\1', article['article_contents'])
                 article['article_contents'] = ref2_re.sub(r'\1', article['article_contents'])
             article['article_contents'] = article['article_contents'].replace("\n", "")
-            text += article['voteup_count'] + " " + article['article_contents'] + "\n"
+            print(article['voteup_count'], article['article_contents'])
             cnt += 1
             if cnt > 20:
                 break
         print('=' * 60)
-        print(item["_source"]["title"], item["_source"]["url"], item["sort"])
-        print(text)
 
 
 
