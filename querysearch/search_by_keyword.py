@@ -94,6 +94,10 @@ def search_demo():
     if explain:
         print(json.dumps(result.body, ensure_ascii=False))
 
+    print_content(result)
+
+
+def print_content(result):
     for item in result["hits"]["hits"]:
         print(item["_source"]["title"], item["_source"]["url"], item["sort"])
         key = lambda item: (int(item['voteup_count']))
@@ -115,5 +119,5 @@ def search_demo():
         print('=' * 60)
 
 
-
-search_demo()
+if __name__ == '__main__':
+    search_demo()

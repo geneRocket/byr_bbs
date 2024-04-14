@@ -2,6 +2,8 @@ import datetime
 
 from elasticsearch import Elasticsearch
 
+from querysearch import search_by_keyword
+
 es = Elasticsearch(hosts="http://localhost:9200")
 
 
@@ -33,17 +35,13 @@ def get_demo():
 
         },
 
-        "from": 0, "size": 2000,
+        "from": 0, "size": 100,
 
     }
 
     result = es.search(index='byr_articles', body=dsl)
-    for item in result["hits"]["hits"]:
-        text = ''
-        for article in item['_source']['articles']:
-            text = (text + "\n" + '=' * 20 + '\n' + article['article_contents'])
-        print(item["_source"]["title"], item["_source"]["url"], item["sort"])
-        # print(text)
+    search_by_keyword.print_content(result)
 
 
-get_demo()
+if __name__ == '__main__':
+    get_demo()
