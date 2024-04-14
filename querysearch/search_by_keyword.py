@@ -1,4 +1,5 @@
 import json
+import re
 
 from elasticsearch import Elasticsearch
 
@@ -98,17 +99,20 @@ def search_demo():
         key = lambda item: (int(item['voteup_count']))
         item['_source']['articles'].sort(key=key, reverse=True)
         cnt = 0
+        ref1_re = re.compile(r'【 在 .+ 的大作中提到: 】\n: .+\n+(.+)')
+        ref2_re = re.compile(r'(.+)\n+【 在 .+ 的大作中提到: 】\n: .+')
         for article in item['_source']['articles']:
-            if (int(article['voteup_count']) == 0):
+            if (int(article['voteup_count']) < 5):
                 break
             if "【 在 " in article['article_contents']:
-                article['article_contents'] = article['article_contents'][:article['article_contents'].find("【 在 ")]
+                article['article_contents'] = ref1_re.sub(r'\1', article['article_contents'])
+                article['article_contents'] = ref2_re.sub(r'\1', article['article_contents'])
             article['article_contents'] = article['article_contents'].replace("\n", "")
             text += article['voteup_count'] + " " + article['article_contents'] + "\n"
             cnt += 1
-            if cnt > 5:
+            if cnt > 20:
                 break
-        print('=' * 40)
+        print('=' * 60)
         print(item["_source"]["title"], item["_source"]["url"], item["sort"])
         print(text)
 
