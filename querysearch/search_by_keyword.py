@@ -103,8 +103,8 @@ def print_content(result):
         key = lambda item: (int(item['voteup_count']))
         item['_source']['articles'].sort(key=key, reverse=True)
         cnt = 0
-        ref1_re = re.compile(r'[【 在 .+ 的大作中提到: 】\n: .+\n+]+(.+)')
-        ref2_re = re.compile(r'(.+)\n+[【 在 .+ 的大作中提到: 】\n: .+]+')
+        ref1_re = re.compile(r'【 在 .+ 的大作中提到: 】\n: .+\n+(.+)')
+        ref2_re = re.compile(r'(.+)\n+【 在 .+ 的大作中提到: 】\n+[: .+\n?]+')
         for article in item['_source']['articles']:
             if (int(article['voteup_count']) < 5):
                 break
