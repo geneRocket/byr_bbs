@@ -1,6 +1,7 @@
 import os
 
 import load2es
+import merge
 
 if not os.path.exists("byr_data.json"):
     with open("byr_data.json", "a+") as _:
@@ -20,6 +21,6 @@ process.start()
 process.join()
 if True:
     load2es.doLoadEs()
-if False:
+if True:
     merge.doMerge()
     os.remove("byr_data.json")

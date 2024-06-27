@@ -84,9 +84,9 @@ class LoadEs(object):
         if not self.es.indices.exists(index='byr_articles'):
             self.es.indices.create(index='byr_articles', body=get_mapping())
 
-    def process_item(self):
+    def process_item(self, fileName):
         i = 0
-        for line in open("byr_data.json", "r"):
+        for line in open(fileName, "r"):
             i += 1
             try:
                 item = json.loads(line)
@@ -101,10 +101,10 @@ class LoadEs(object):
                 print(len(self.tmp_set))
 
 
-def doLoadEs():
+def doLoadEs(fileName='byr_data.json'):
     load = LoadEs()
-    load.process_item()
+    load.process_item(fileName)
 
 
 if __name__ == '__main__':
-    doLoadEs()
+    doLoadEs(fileName='byr_data_merge.json')
