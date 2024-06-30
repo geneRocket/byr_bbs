@@ -116,8 +116,8 @@ def print_content(result):
 
 
 def exact_content(article_content):
-    ref1_re = re.compile(r'【 在 .+ 的大作中提到: 】\n: .+\n+(.+)')
-    ref2_re = re.compile(r'(.+)\n+【 在 .+ 的大作中提到: 】\n+[: .+\n?]+')
+    ref1_re = re.compile(r'(.+)\n+【 在 .+ 的大作中提到: 】\n+: .+')
+    ref2_re = re.compile(r'【 在 .+ 的大作中提到: 】\n: .+\n+(.+)')
     if "【 在 " in article_content:
         article_content = ref1_re.sub(r'\1', article_content)
         article_content = ref2_re.sub(r'\1', article_content)
