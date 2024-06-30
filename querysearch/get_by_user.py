@@ -33,9 +33,8 @@ def get_demo():
         text = ''
         for article in item['_source']['articles']:
             if article['id'] == author:
-                if '【' in article['article_contents']:
-                    article['article_contents'] = article['article_contents'][:article['article_contents'].find('【')]
-                text = (text + "\n" + article['article_contents'])
+                article['article_contents'] = search_by_keyword.exact_content(article['article_contents'])
+                text = text + "\n" + article['time'] + " " + article['article_contents']
         print(item["_source"]["title"], item["_source"]["url"])
         print(text)
         print('=' * 20)

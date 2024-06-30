@@ -98,25 +98,31 @@ def search_demo():
 
 
 def print_content(result):
+    print("改写以下内容，分为几点：")
     for item in result["hits"]["hits"]:
-        print(item["_source"]["title"], item["_source"]["url"], item["sort"])
+        print(item["_source"]["title"], item["_source"]["url"], item["_source"]["reply_time"])
         key = lambda item: (int(item['voteup_count']))
         item['_source']['articles'].sort(key=key, reverse=True)
         cnt = 0
-        ref1_re = re.compile(r'【 在 .+ 的大作中提到: 】\n: .+\n+(.+)')
-        ref2_re = re.compile(r'(.+)\n+【 在 .+ 的大作中提到: 】\n+[: .+\n?]+')
         for article in item['_source']['articles']:
             if (int(article['voteup_count']) < 5):
                 break
-            if "【 在 " in article['article_contents']:
-                article['article_contents'] = ref1_re.sub(r'\1', article['article_contents'])
-                article['article_contents'] = ref2_re.sub(r'\1', article['article_contents'])
-            article['article_contents'] = article['article_contents'].replace("\n", "")
-            print(article['voteup_count'], article['article_contents'])
+            article['article_contents'] = exact_content(article['article_contents'])
+            print(article['voteup_count'] + "赞", article['article_contents'])
             cnt += 1
             if cnt > 20:
                 break
-        print('=' * 60)
+        print('')
+
+
+def exact_content(article_content):
+    ref1_re = re.compile(r'【 在 .+ 的大作中提到: 】\n: .+\n+(.+)')
+    ref2_re = re.compile(r'(.+)\n+【 在 .+ 的大作中提到: 】\n+[: .+\n?]+')
+    if "【 在 " in article_content:
+        article_content = ref1_re.sub(r'\1', article_content)
+        article_content = ref2_re.sub(r'\1', article_content)
+    article_content = article_content.replace("\n", "")
+    return article_content
 
 
 if __name__ == '__main__':
