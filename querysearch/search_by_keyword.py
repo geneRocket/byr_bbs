@@ -7,7 +7,7 @@ es = Elasticsearch(hosts="http://localhost:9200")
 
 
 def search_demo():
-    words = ["北邮"]
+    words = [""]
 
     dsl = {
         "query": {
@@ -110,9 +110,11 @@ def print_content(result):
                 break
             article['article_contents'] = exact_content(article['article_contents'])
             if "\n" in article['article_contents']:
-                print(article['voteup_count'] + "赞" + "\n" + article['article_contents'])
+                print(
+                    article['voteup_count'] + "赞" + "\n" + "    " + "\n    ".join(
+                        article['article_contents'].split("\n")))
             else:
-                print(article['voteup_count'] + "赞" + ":" + article['article_contents'])
+                print(article['voteup_count'] + "赞" + " " + article['article_contents'])
             cnt += 1
             if cnt > 20:
                 break
