@@ -21,7 +21,8 @@ def search_demo():
                             {
                                 "range": {
                                     'reply_time': {
-                                        # 'gte': '2020-06-01'
+                                        # 'gte': '2022-01-01',
+                                        # 'lte': '2022-01-01',
                                     }
                                 }
                             }
@@ -116,12 +117,14 @@ def print_content(result):
 
 
 def exact_content(article_content):
-    ref1_re = re.compile(r'(.+)\n+【 在 .+ 的大作中提到: 】\n+: .+')
-    ref2_re = re.compile(r'【 在 .+ 的大作中提到: 】\n: .+\n+(.+)')
+    ref2_re = re.compile(r'【 在 .+ 的大作中提到: 】\n(:.+\n)+((.*\n*)+$)')
     if "【 在 " in article_content:
-        article_content = ref1_re.sub(r'\1', article_content)
-        article_content = ref2_re.sub(r'\1', article_content)
-    article_content = article_content.replace("\n", "")
+        if not article_content.startswith(" 【 在 ") and not article_content.startswith("【 在 "):
+            article_content = article_content[:article_content.find("【 在 ")]
+        match = ref2_re.match(article_content)
+        if match is not None:
+            article_content = match.group(2)
+        article_content = article_content.replace("\n", "")
     return article_content
 
 

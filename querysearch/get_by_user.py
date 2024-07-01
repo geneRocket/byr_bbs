@@ -1,5 +1,7 @@
 from elasticsearch import Elasticsearch
 
+import search_by_keyword
+
 es = Elasticsearch(hosts="http://localhost:9200")
 
 
