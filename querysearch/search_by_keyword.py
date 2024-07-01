@@ -109,7 +109,10 @@ def print_content(result):
             if (int(article['voteup_count']) < 5):
                 break
             article['article_contents'] = exact_content(article['article_contents'])
-            print(article['voteup_count'] + "赞", article['article_contents'])
+            if "\n" in article['article_contents']:
+                print(article['voteup_count'] + "赞" + "\n" + article['article_contents'])
+            else:
+                print(article['voteup_count'] + "赞" + ":" + article['article_contents'])
             cnt += 1
             if cnt > 20:
                 break
@@ -124,7 +127,7 @@ def exact_content(article_content):
         match = ref2_re.match(article_content)
         if match is not None:
             article_content = match.group(2)
-        article_content = article_content.replace("\n", "")
+    article_content = article_content.replace("\n\n", "\n")
     return article_content
 
 
