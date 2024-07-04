@@ -118,7 +118,7 @@ def print_content(result):
             cnt += 1
             if cnt > 20:
                 break
-        print('')
+        print('=' * 100)
 
 
 def exact_content(article_content):
@@ -130,6 +130,10 @@ def exact_content(article_content):
         if match is not None:
             article_content = match.group(2)
     article_content = article_content.replace("\n\n", "\n")
+    article_content = article_content.replace("<b>", "")
+    article_content = article_content.replace("</b>", "")
+    if article_content.endswith("\n"):
+        article_content = article_content[:-1]
     return article_content
 
 
