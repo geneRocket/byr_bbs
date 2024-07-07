@@ -36,6 +36,8 @@ def check_time_for_item(item):
     for article in item['articles']:
         if not check_time(article['time']):
             return False
+    if not check_time(item['reply_time']):
+        return False
     return True
 
 
@@ -169,6 +171,8 @@ class BoardSpiderSpider(scrapy.Spider):
                 self.skip_count += 1
                 if (self.skip_count % 10000 == 0):
                     print("skip:", self.skip_count)
+                continue
+            if url == "https://bbs.byr.cn/#!article/Constellations/465260":
                 continue
             has_new_reply = True
             item = ArticleItem()

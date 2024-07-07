@@ -106,7 +106,7 @@ def print_content(result):
         item['_source']['articles'].sort(key=key, reverse=True)
         cnt = 0
         for article in item['_source']['articles']:
-            if (int(article['voteup_count']) < 5):
+            if (int(article['voteup_count']) == 0):
                 break
             article['article_contents'] = exact_content(article['article_contents'])
             if "\n" in article['article_contents']:
