@@ -38,7 +38,7 @@ def search_demo():
                                 "lang": "painless"
                             },
                         },
-                        "weight": 1
+                        "weight": 0.1
                     },
                     {
                         "field_value_factor": {
@@ -46,11 +46,11 @@ def search_demo():
                             "modifier": "log2p",  # ln2p，log2p
                             "factor": 0.5
                         },
-                        "weight": 1
+                        "weight": 0.1
                     },
                 ],
-                "score_mode": "multiply",
-                "boost_mode": "multiply",
+                "score_mode": "sum",  # functions内的组合方式
+                "boost_mode": "multiply",  # query和functions的组合方式
                 "max_boost": 3
             },
 
