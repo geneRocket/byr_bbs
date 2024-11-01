@@ -34,6 +34,7 @@ def search_demo():
                     {
                         "script_score": {
                             "script": {
+                                # https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-script-score-query.html
                                 "source": "Math.log10(2+(doc['articles.voteup_count'].sum()))",
                                 "lang": "painless"
                             },
