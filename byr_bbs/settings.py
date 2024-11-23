@@ -57,7 +57,8 @@ RETRY_TIMES = 0
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
     # 'byr_bbs.middlewares.proxy_pool.RandomProxy': 300,
-    'byr_bbs.middlewares.random_useragent.RandomUserAgent': 543,
+    'byr_bbs.middlewares.random_useragent.RandomUserAgent': 300,
+    'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
     # 'byr_bbs.middlewares.ByrBbsDownloaderMiddleware': 543,
 }
 
@@ -88,7 +89,7 @@ ITEM_PIPELINES = {
 
 # Enable and configure HTTP caching (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings
-# HTTPCACHE_ENABLED = True
+HTTPCACHE_ENABLED = False
 # HTTPCACHE_EXPIRATION_SECS = 0
 # HTTPCACHE_DIR = 'httpcache'
 # HTTPCACHE_IGNORE_HTTP_CODES = []
