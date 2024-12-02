@@ -173,7 +173,9 @@ class BoardSpiderSpider(scrapy.Spider):
                     print("skip:", self.skip_count)
                 continue
             if url in ["https://bbs.byr.cn/#!article/Constellations/465260",
-                       "https://bbs.byr.cn/#!article/Constellations/408580"]:
+                       "https://bbs.byr.cn/#!article/Constellations/408580",
+                       "https://bbs.byr.cn/#!article/Constellations/326533",
+                       ]:
                 continue
             has_new_reply = True
             item = ArticleItem()
