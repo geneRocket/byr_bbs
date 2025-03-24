@@ -103,6 +103,7 @@ class BoardSpiderSpider(scrapy.Spider):
             yield scrapy.Request(
                 url='https://bbs.byr.cn/index',
                 meta={'cookiejar': 1},
+                cookies=None,
                 callback=self.post_login
             )
         except:
