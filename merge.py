@@ -2,8 +2,10 @@ import json
 import re
 
 
+def key_exactor(item):
+    return (item['id'], item['article_contents'])
+
 def unique(item_list):
-    key_exactor = lambda item: (item['id'], item['article_contents'])
 
     key_dict = dict()
     key_order = []

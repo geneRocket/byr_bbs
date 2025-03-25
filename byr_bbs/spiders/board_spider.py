@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 import datetime
 import json
+import math
 import re
 from copy import deepcopy
 
 import scrapy
 
+import merge
 from byr_bbs.items import BoardItem, ArticleItem
 from .bbs_config import HEADERS, LOGIN_FORM_DATA
 
@@ -173,11 +175,11 @@ class BoardSpiderSpider(scrapy.Spider):
                 if (self.skip_count % 10000 == 0):
                     print("skip:", self.skip_count)
                 continue
-            if url in ["https://bbs.byr.cn/#!article/Constellations/465260",
-                       "https://bbs.byr.cn/#!article/Constellations/408580",
-                       "https://bbs.byr.cn/#!article/Constellations/326533",
-                       ]:
-                continue
+            # if url in ["https://bbs.byr.cn/#!article/Constellations/465260",
+            #            "https://bbs.byr.cn/#!article/Constellations/408580",
+            #            "https://bbs.byr.cn/#!article/Constellations/326533",
+            #            ]:
+            #     continue
             has_new_reply = True
             item = ArticleItem()
             item['title'] = post['title']
@@ -186,9 +188,10 @@ class BoardSpiderSpider(scrapy.Spider):
             item['url'] = url
             item['reply_time'] = normalized_time(post['replyTime'])
             item['reply_count'] = post['replyCount']
+            max_page = math.ceil((1 + int(post['replyCount'])) / 10)
             yield scrapy.Request(
                 url='https://bbs.byr.cn/n/b/article/' + json_dict['data']['name'] + '/'
-                    + str(post['gid']) + '.json?page=1',
+                    + str(post['gid']) + '.json?page=' + str(max_page),
                 meta={
                     'item': deepcopy(item),
                     'name': json_dict['data']['name']
@@ -217,6 +220,13 @@ class BoardSpiderSpider(scrapy.Spider):
         article_list = json_dict['data']['articles']
         item = response.meta['item']
         articles = []
+        has_old_reply = False
+        url = 'https://bbs.byr.cn/#!article/' + response.meta['name'] + '/' + str(item['gid'])
+        old_article_keys = set()
+        if url in self.data_dict:
+            for old_article in self.data_dict[url]['articles']:
+                old_article_keys.add(merge.key_exactor(old_article))
+
         for article in article_list:
             contents = dict()
             contents['id'] = article['poster']['id']
@@ -234,13 +244,15 @@ class BoardSpiderSpider(scrapy.Spider):
             contents['votedown_count'] = article['votedown_count']
             contents['pos'] = article['pos']
             articles.append(contents)
+            if merge.key_exactor(contents) in old_article_keys:
+                has_old_reply = True
         if (item.get('articles') is None):
             item['articles'] = []
         item['articles'] = item['articles'] + articles
 
         # 翻页
-        if current_page < total_page:
-            current_page += 1
+        if has_old_reply == False and current_page > 1:
+            current_page -= 1
             yield scrapy.Request(
                 url='https://bbs.byr.cn/n/b/article/' + response.meta['name'] + '/'
                     + str(item['gid']) + '.json?page=' + str(current_page),
@@ -251,5 +263,8 @@ class BoardSpiderSpider(scrapy.Spider):
                 callback=self.parse_articles
             )
         else:
+            if url in self.data_dict:
+                old = self.data_dict[url]
+                item = merge.merge(old, item)
             print(json.dumps(dict(item), ensure_ascii=False))
             yield item
