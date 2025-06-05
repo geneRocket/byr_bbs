@@ -22,5 +22,6 @@ process.join()
 if True:
     load2es.doLoadEs()
 if True:
+    # exit(0)
     merge.doMerge()
     os.remove("byr_data.json")

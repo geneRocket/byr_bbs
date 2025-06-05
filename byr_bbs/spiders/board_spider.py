@@ -245,6 +245,7 @@ class BoardSpiderSpider(scrapy.Spider):
             contents['pos'] = article['pos']
             articles.append(contents)
             if merge.key_exactor(contents) in old_article_keys:
+                print("skip:", merge.key_exactor(contents))
                 has_old_reply = True
         if (item.get('articles') is None):
             item['articles'] = []

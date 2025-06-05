@@ -1,9 +1,10 @@
 import json
 import re
+import shutil
 
 
 def key_exactor(item):
-    return (item['id'], item['article_contents'])
+    return (item['id'], item["pos"], item['article_contents'])
 
 def unique(item_list):
 
@@ -55,9 +56,10 @@ class MergeFile(object):
         return item
 
     def save_data(self):
-        with open("byr_data_merge.json", "w") as outfile:
+        with open("byr_data_merge.json.temp", "w") as outfile:
             for value in self.data_dict.values():
                 outfile.write(json.dumps(value, ensure_ascii=False) + "\n")
+        shutil.move("byr_data_merge.json.temp", "byr_data_merge.json")
 
 
 def doMerge():
